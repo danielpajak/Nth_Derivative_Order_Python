@@ -5,4 +5,4 @@ Main goal to achive was creating a tool which shows factors, indexes of points u
 
 I also implemented ImageJ plugin which used this algorithm to sherpen images or stacks of images. https://github.com/danielpajak/Nth_Order_Derivative
 
-Both implementation are part of my thesis.
+Both implementations are part of my thesis.
