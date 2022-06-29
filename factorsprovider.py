@@ -6,21 +6,23 @@ class FactorsProvider:
     @staticmethod
     def calculate_factors(window_size, derivative_order, points):
 
-        ndarray = np.zeros((window_size, window_size))
-        matrix = np.matrix(ndarray)
+        matrix = np.zeros((window_size, window_size))
 
         for k, point in enumerate(points):
             for x in range(window_size):
-                matrix.itemset((x, k), point ** x)
+                temp = point ** x
+                matrix[x][k] = temp
 
-        ndarray = np.zeros((window_size, 1))
-        factorial_matrix = np.matrix(ndarray)
+        inverse_matrix = np.linalg.inv(matrix)
 
-        factorial_matrix.itemset((derivative_order, 0), np.math.factorial(derivative_order))
+        factorial_matrix = np.zeros((window_size, 1))
 
-        output_matrix = matrix.I @ factorial_matrix
+        factorial_matrix[derivative_order][0] = np.math.factorial(derivative_order)
 
-        factors = output_matrix.A1
+        output_matrix = inverse_matrix.dot(factorial_matrix)
+
+        result = output_matrix.flatten()
+        factors = result.tolist()
 
         print("factors: %s" % factors, end='\n\n')
 
