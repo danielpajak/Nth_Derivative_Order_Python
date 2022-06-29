@@ -10,19 +10,15 @@ class FactorsProvider:
 
         for k, point in enumerate(points):
             for x in range(window_size):
-                temp = point ** x
-                matrix[x][k] = temp
-
-        inverse_matrix = np.linalg.inv(matrix)
+                matrix[x][k] = point ** x
 
         factorial_matrix = np.zeros((window_size, 1))
 
         factorial_matrix[derivative_order][0] = np.math.factorial(derivative_order)
 
-        output_matrix = inverse_matrix.dot(factorial_matrix)
+        output_matrix = np.linalg.solve(matrix, factorial_matrix)
 
-        result = output_matrix.flatten()
-        factors = result.tolist()
+        factors = output_matrix.flatten().tolist()
 
         print("factors: %s" % factors, end='\n\n')
 
